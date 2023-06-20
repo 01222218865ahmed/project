@@ -11,8 +11,8 @@ app = Flask(__name__)
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from tensorflow.keras.models import load_model
 
-@app.route('/process_data')
 def process_data():
     # Get data from Firebase
     # Use a service account.
@@ -31,19 +31,16 @@ def process_data():
     for doc in docs:
         doc_data = doc.to_dict()
         data_list.append(doc_data)
-        print(data_list)
-
     # create a new list with only the values from each dictionary
     values_list = [list(data_dict.values()) for data_dict in data_list]
 
     # convert
     my_array = np.array(values_list)
-
-    #PREDICT
-    from tensorflow.keras.models import load_model
+     #PREDICT
 
     model = tf.keras.models.load_model('model.h5')
     
+    ###########
     results = []
 
     for i in range(len(my_array)):
@@ -103,6 +100,11 @@ def process_data():
 
     my_dict = {'output': [sentence]}
     data = [my_dict]
+    return data 
+
+@app.route('/process_data')
+def predict ():
+    data=process_data()
     
     #output to firebase
     for record in data:
