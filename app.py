@@ -1,12 +1,10 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import keras
 import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.utils import to_categorical
-from sklearn import metrics
 from flask import Flask
 import tensorflow as tfbase
 app = Flask(__name__)
