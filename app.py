@@ -18,7 +18,7 @@ from firebase_admin import firestore
 def process_data():
     # Get data from Firebase
     # Use a service account.
-    cred = credentials.Certificate('./project.json')
+    cred = credentials.Certificate('project.json')
 
     # check if the app has already been initialized
     if not firebase_admin._apps:
@@ -118,6 +118,6 @@ def process_data():
         doc_ref.set(record)
     return my_dict        
         
-    #/////////////////////////////////////////////////////////////
+#/////////////////////////////////////////////////////////////
 if __name__ == '__main__':
-    app.run(debug=True, port=9000)
+    app.run(host="0.0.0", port=9000)
